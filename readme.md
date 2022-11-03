@@ -7,3 +7,9 @@ This is a simple program inspired by a tweet that I saw. It's a simple program t
 ```bash
 $ node ask.js "What is the meaning of life?"
 ```
+
+Consider adding an alias to your `.bashrc` or `.zshrc` file:
+
+```bash
+alias ask="node ~/path/to/ask.js"
+```
