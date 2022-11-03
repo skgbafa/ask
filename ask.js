@@ -9,6 +9,7 @@ program
   .option('--codex', 'Use Codex instead of Davinci')
   .option('--large', 'Use large model instead of small')
   .option('--text', 'Use prompt as is instead of modifying')
+  .option('--model <model>', 'Model to use')
   .argument('<prompt>', 'Prompt to ask GPT-3')
 
 program.parse();
@@ -16,14 +17,14 @@ program.parse();
 
 const runQuery = async () => {
     // get args
-    const {codex, large, text} = program.opts();
-    const model = codex
+    const { codex, large, text, model } = program.opts();
+    const selectedModel = codex
         ? large ? 'code-davinci-002': 'code-cushman-001'
         : large ? 'text-davinci-002': 'text-curie-001';
     
     let [prompt] = program.args;
 
-    if (!text ) {
+    if (!text && codex) {
         prompt = `/* ${prompt} */`;
     }
 
@@ -33,7 +34,7 @@ const runQuery = async () => {
     });
     const openai = new OpenAIApi(configuration);
     const response = await openai.createCompletion({
-        model,
+        model: model || selectedModel,
         prompt,
         temperature: 0.7,
         max_tokens: 256,
