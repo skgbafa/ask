@@ -1,0 +1,10 @@
+{
+  "name": "gpt3",
+  "version": "1.0.0",
+  "main": "ask.js",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^9.4.1",
+    "openai": "^3.1.0"
+  }
+}
